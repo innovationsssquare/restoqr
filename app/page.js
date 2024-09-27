@@ -1,13 +1,13 @@
-import Image from "next/image";
+import FoodCategories from "@/components/ui/Homecomponets/Categories";
+import Header from "@/components/ui/Homecomponets/Header";
+import TodaysSpecial from "@/components/ui/Homecomponets/Todaysspecial";
 
-export default function Home() {
+export default function Component() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <p className="text-xl mb-4">🌺🙏 Ganesh Chaturthi Special Announcement 🙏🌺</p>
-       <p className="w-3/4">On this auspicious
-      occasion of Ganesh Chaturthi, as we seek the blessings of Lord Ganesha,
-      the remover of obstacles and harbinger of new beginnings, we are thrilled
-      to announce the launch of our Restaurant QR Ordering System! 🎉✨</p>
-    </div>
+    <section className="">
+      <Header />
+      <FoodCategories/>
+      <TodaysSpecial/>
+    </section>
   );
 }
