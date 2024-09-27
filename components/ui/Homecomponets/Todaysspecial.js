@@ -33,7 +33,7 @@ export default function TodaysSpecial() {
   return (
     <div className="w-full px-1 mx-auto  ">
       <div className="flex justify-between items-center px-2 mb-2">
-        <h2 className="text-xl font-bold">Today's Special</h2>
+        <h2 className="text-xl font-bold">{`Today's Special`}</h2>
         <Button variant="link" className="text-[#F04F5F]">
           See All
         </Button>

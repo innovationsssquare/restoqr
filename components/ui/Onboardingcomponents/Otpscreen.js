@@ -91,7 +91,7 @@ export default function PhoneVerification() {
               Enter OTP
             </h2>
             <p className="text-center text-gray-600 mb-8">
-              We've sent a one-time password to {phoneNumber}
+              {`We've sent a one-time password to`} {phoneNumber}
             </p>
             <div className="flex justify-center space-x-4 mb-8">
               {otp.map((digit, index) => (
@@ -114,7 +114,7 @@ export default function PhoneVerification() {
               Verify OTP
             </Button>
             <p className="text-center mt-6 text-gray-600">
-              Didn't receive the OTP?{" "}
+             {` Didn't receive the OTP?`}{" "}
               <Button
                 variant="link"
                 className="text-[#F04F5F] hover:text-[#E03F4F]"
