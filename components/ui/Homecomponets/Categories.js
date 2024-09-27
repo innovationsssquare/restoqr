@@ -24,7 +24,7 @@ const categories = [
 
 export default function FoodCategories() {
   return (
-    <div className="w-full flex flex-col justify-center items-center mx-auto px-2 py-2">
+    <div className="w-full flex flex-col justify-center items-center mx-auto px-2  py-2">
       <div className="flex w-full justify-between items-center mb-2">
         <h2 className="text-xl font-bold text-gray-900">Categories</h2>
         <Button variant="link" className="text-[#F04F5F]">
