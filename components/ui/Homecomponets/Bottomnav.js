@@ -24,6 +24,9 @@ export default function Bottomnav() {
       case "/Table":
         setSelected("Table");
         break;
+      case "/Order-status":
+        setSelected("Cart");
+        break;
       default:
         setSelected("Home");
     }

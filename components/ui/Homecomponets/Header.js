@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, ShoppingCart, Mic, Battery, Signal, Wifi } from "lucide-react";
+import { Search, Bell, Mic, Battery, Signal, Wifi } from "lucide-react";
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,8 +22,8 @@ export default function Header() {
             <p className="text-sm">What would you like to eat?</p>
           </div>
           <div className="relative">
-            <ShoppingCart className="h-7 w-7" />
-            <span className="absolute -top-2 -right-2 bg-white text-[#F04F5F] rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
+            <Bell className="h-7 w-7" />
+            <span className="absolute -top-2 -right-1 bg-white text-[#F04F5F] rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
               2
             </span>
           </div>
