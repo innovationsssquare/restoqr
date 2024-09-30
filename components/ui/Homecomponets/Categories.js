@@ -6,13 +6,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { Button } from "@/components/ui/button"
 import Biryani from "../../../public/Asset/Biryani2.png"
 import Pizza from "../../../public/Asset/Pizza.png"
 import Burger from "../../../public/Asset/Burger.png"
 import Noodles from "../../../public/Asset/Noodles.png"
 import Image from "next/image"
-import { Divider } from "@nextui-org/react"
+import { Divider,Button } from "@nextui-org/react"
 
 const categories = [
   { name: "Biryani", image: Biryani },
@@ -25,9 +24,10 @@ const categories = [
 export default function FoodCategories() {
   return (
     <div className="w-full flex flex-col justify-center items-center mx-auto px-2  py-2">
-      <div className="flex w-full justify-between items-center mb-2">
-        <h2 className="text-xl font-bold text-gray-900">Categories</h2>
-        <Button variant="link" className="text-[#F04F5F]">
+     
+      <div className="flex justify-between items-center w-full px-2 mb-2">
+        <h2 className="text-xl font-bold">Categories</h2>
+        <Button variant="link" className="text-[#F04F5F] text-sm font-medium">
           See All
         </Button>
       </div>

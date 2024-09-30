@@ -31,7 +31,7 @@ export default function TodaysSpecial() {
   const [emblaRef] = useEmblaCarousel({ loop: false, align: 'start' })
 
   return (
-    <div className="w-full px-1 mx-auto  ">
+    <div className="w-full px-2 mx-auto  ">
       <div className="flex justify-between items-center px-2 mb-2">
         <h2 className="text-xl font-bold">{`Today's Special`}</h2>
         <Button variant="link" className="text-[#F04F5F]">
