@@ -171,8 +171,8 @@ export default function Cart() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto h-[600px] flex flex-col">
-      <CardHeader>
+    <Card className="w-full  mx-auto h-auto py-20 flex flex-col">
+      <CardHeader className="fixed top-0 w-full bg-white z-10">
         <CardTitle className="text-2xl">Your Order</CardTitle>
       </CardHeader>
       <ScrollArea className="flex-grow">
@@ -240,18 +240,21 @@ export default function Cart() {
           ))}
         </ScrollArea>
       </CardContent> */}
-      <CardFooter className="flex justify-between pt-4 border-t border-gray-200">
-        <span className="font-semibold">Total</span>
+      <CardFooter className="flex flex-col gap-2 justify-center items-center pt-4 border-t border-gray-200 fixed bottom-16 w-full bg-white">
+       <div className="flex justify-between items-center w-full">
+       <span className="font-semibold">Total</span>
         <span className="font-semibold">₹{total}</span>
-      </CardFooter>
-      <CardContent className="">
+       </div> 
+        
         <Button
           onClick={handleplaceorder}
           className="w-full bg-[#F04F5F] hover:bg-red-600 text-white"
         >
           Place Order
         </Button>
-      </CardContent>
+      </CardFooter>
+      {/* <CardContent className="">
+      </CardContent> */}
       {customizeIndex !== null && (
         <CustomizeDialog
           isOpen={true}

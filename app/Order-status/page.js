@@ -1,11 +1,12 @@
 import { ArrowLeft, Star, PhoneCall } from 'lucide-react'
 import { Button } from "@/components/ui/button"
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export default function OrderStatus() {
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className="flex flex-col py-20 h-full bg-white">
       {/* Header */}
-      <header className="flex justify-between items-center p-4 border-b">
+      <header className="flex justify-between items-center py-4 border-b fixed w-full z-10 bg-white top-0">
         <Button variant="ghost" className="text-red-500">
           <ArrowLeft className="w-5 h-5 mr-2" />
           Order More
@@ -17,7 +18,7 @@ export default function OrderStatus() {
       </header>
 
       {/* Main content */}
-      <main className="flex-grow overflow-auto">
+      <ScrollArea className="flex-grow overflow-auto">
         {/* Chef Illustration */}
         <div className="relative h-64 bg-red-100 rounded-b-full overflow-hidden">
           <svg className="absolute bottom-0 left-1/2 transform -translate-x-1/2" width="200" height="200" viewBox="0 0 200 200">
@@ -70,11 +71,11 @@ export default function OrderStatus() {
             </Button>
           </div>
         </div>
-      </main>
+      </ScrollArea>
 
       {/* Footer */}
-      <footer className="p-4">
-        <Button className="w-full bg-red-500 hover:bg-red-600 text-white py-6 text-lg">
+      <footer className="p-4 fixed bottom-0 w-full bg-white z-10">
+        <Button className="w-full bg-red-500 hover:bg-red-600 text-white py-4 text-lg">
           Get Bill
         </Button>
       </footer>
