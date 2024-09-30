@@ -41,7 +41,7 @@ export default function TableSwitchScreen() {
       </header>
 
       <main className="flex-grow ">
-        <ScrollArea className="h-[80vh] py-16 ">
+        <ScrollArea className="h-[80vh] py-14 ">
           <div className="p-4 grid grid-cols-2 gap-4">
             {tables.map((table) => (
               <TableCard
@@ -56,7 +56,7 @@ export default function TableSwitchScreen() {
         </ScrollArea>
       </main>
 
-      <footer className="bg-white p-4 border-t fixed bottom-16 w-full">
+      <footer className="bg-gray-100 p-4  fixed bottom-16 w-full">
         <Button 
           className="w-full bg-[#F04F5F]" 
           disabled={!selectedTable}
