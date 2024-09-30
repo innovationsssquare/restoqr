@@ -129,8 +129,8 @@ export default function Quickpick() {
   ];
 
   return (
-    <Card className="w-full  mx-auto">
-      <CardContent className="p-4 sm:p-6">
+    <Card className="w-full pb-8 mx-auto">
+      <CardContent className="p-3 sm:p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl sm:text-2xl font-bold">Quick Picks</h2>
           <Button variant="link" className="text-pink-500">
@@ -138,15 +138,15 @@ export default function Quickpick() {
           </Button>
         </div>
        <TabSlider/>
-        <div className="grid grid-cols-2 sm:grid-cols-3 py-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 py-4 gap-4 w-full">
           {quickPicks.map((item, index) => (
             <Drawer key={index}>
               <DrawerTrigger asChild>
                 <div
-                  className="relative cursor-pointer rounded-sm"
+                  className="relative cursor-pointer rounded-sm ring-1 ring-gray-300 shadow-sm"
                   onClick={() => setSelectedDish(item)}
                 >
-                  <div className="relative aspect-square mb-2 rounded-sm bg-slate-200">
+                  <div className="relative aspect-square mb-2 rounded-t-sm bg-slate-200 ">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -166,7 +166,7 @@ export default function Quickpick() {
                      <Image src={Addicon} alt="addicon" className="w-12 h-12"/>
                     </Button>
                   </div>
-                  <p className="font-medium text-sm">{item.name}</p>
+                  <p className="font-medium text-sm p-2">{item.name}</p>
                 </div>
               </DrawerTrigger>
               <DrawerContent>
