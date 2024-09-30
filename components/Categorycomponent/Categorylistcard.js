@@ -28,6 +28,14 @@ const foodItems = [
     image: MasalaTea,
     isVeg: false,
   },
+  {
+    id: '2',
+    name: 'Chicken Biryani',
+    description: 'Tender chicken, fragrant basmati rice & hint of spices. A classic Indian favorite, cooked to perfection!',
+    price: 349,
+    image: MasalaTea,
+    isVeg: false,
+  },
 ]
 
 export default function FoodItemList() {
