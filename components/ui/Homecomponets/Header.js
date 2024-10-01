@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Search, Bell, Mic, Battery, Signal, Wifi } from "lucide-react";
+import VoiceSearch from "./Voicesearch";
+import NotificationSheet from "./Notification";
 
 export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,10 +24,7 @@ export default function Header() {
             <p className="text-sm">What would you like to eat?</p>
           </div>
           <div className="relative">
-            <Bell className="h-7 w-7" />
-            <span className="absolute -top-2 -right-1 bg-white text-[#F04F5F] rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
-              2
-            </span>
+            <NotificationSheet/>
           </div>
         </div>
 
@@ -47,7 +46,7 @@ export default function Header() {
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
           />
           <div className="absolute inset-y-0 right-3 flex items-center">
-            <Mic className="h-5 w-5 text-[#F04F5F]" />
+          <VoiceSearch/>
           </div>
         </div>
 

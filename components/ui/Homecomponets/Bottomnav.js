@@ -17,6 +17,8 @@ export default function Bottomnav() {
         break;
       case "/Category":
         setSelected("Category");
+      case "/Seeallcategory":
+        setSelected("Category");
         break;
       case "/Cart":
         setSelected("Cart");

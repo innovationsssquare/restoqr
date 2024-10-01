@@ -7,6 +7,10 @@ import TodaysSpecial from "@/components/ui/Homecomponets/Todaysspecial";
 export default function Component() {
   return (
     <section className="">
+     {/* {(pathname !== '/Cart' && pathname !== '/Order-status' && pathname !== '/Table') && <Header />}
+     {(pathname !== '/Cart' && pathname !== '/Order-status' && pathname !== '/Table') && <FoodCategories />} */}
+     <Header/>
+     <FoodCategories/>
       <TodaysSpecial/>
       <div className="py-4">
       <Quickpick/>

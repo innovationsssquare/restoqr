@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react"
 import {
   Carousel,
@@ -12,6 +13,7 @@ import Burger from "../../../public/Asset/Burger.png"
 import Noodles from "../../../public/Asset/Noodles.png"
 import Image from "next/image"
 import { Divider,Button } from "@nextui-org/react"
+import { useRouter } from "next/navigation"
 
 const categories = [
   { name: "Biryani", image: Biryani },
@@ -22,12 +24,13 @@ const categories = [
 ]
 
 export default function FoodCategories() {
+  const router=useRouter()
   return (
     <div className="w-full flex flex-col justify-center items-center mx-auto px-2  py-2">
      
       <div className="flex justify-between items-center w-full px-2 mb-2">
         <h2 className="text-xl font-bold">Categories</h2>
-        <Button variant="link" className="text-[#F04F5F] text-sm font-medium">
+        <Button onClick={()=>router.push("/Seeallcategory")} variant="link" className="text-[#F04F5F] text-sm font-medium">
           See All
         </Button>
       </div>

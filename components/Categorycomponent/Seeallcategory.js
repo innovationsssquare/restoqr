@@ -1,14 +1,17 @@
-"use client";
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { PencilIcon } from "lucide-react";
-import Image from "next/image";
+"use client"
+import React, { useState } from 'react'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent } from "@/components/ui/card"
+import { ChevronLeft, Search, SlidersHorizontal, Pencil, ChevronRight } from 'lucide-react'
+import Image from "next/image"
 import Vegicon from "@/public/Asset/Vegicon.png";
 import Nonvegicon from "@/public/Asset/Nonvegicon.png";
 import Addicon from "@/public/Asset/Addicon.png";
 import MasalaTea from "@/public/Asset/MasalaTea.png";
-import Fries from "@/public/Asset/Fries.png";
+import Fries from "@/public/Asset/Fries.png"; 
+import useEmblaCarousel from 'embla-carousel-react'
+import NotificationSheet from '../ui/Homecomponets/Notification'
 import {
   Drawer,
   DrawerClose,
@@ -26,37 +29,22 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const foodItems = [
-  {
-    id: "1",
-    name: "Veg Biryani",
-    description:
-      "Saffron-infused basmati rice, fresh veggies, warming spices. Authentic Indian flavors in every bite!",
-    price: 259,
-    image: Fries,
-    isVeg: true,
-  },
-  {
-    id: "2",
-    name: "Chicken Biryani",
-    description:
-      "Tender chicken, fragrant basmati rice & hint of spices. A classic Indian favorite, cooked to perfection!",
-    price: 349,
-    image: MasalaTea,
-    isVeg: false,
-  },
-  {
-    id: "2",
-    name: "Chicken Biryani",
-    description:
-      "Tender chicken, fragrant basmati rice & hint of spices. A classic Indian favorite, cooked to perfection!",
-    price: 349,
-    image: MasalaTea,
-    isVeg: false,
-  },
-];
 
-export default function FoodItemList() {
+const categories = ['All', 'Biryani', 'Pizza', 'Burger', 'Noodles', 'Pasta', 'Dessert', 'Drinks', 'Salads', 'Appetizers']
+
+const foodItems = [
+  { id: '1', name: 'Veg Biryani', category: 'Biryani', price: 259, image: Fries, description: 'Saffron-infused basmati rice, fresh veggies, warming spices. Authentic Indian flavors in every bite!', isVeg: true },
+  { id: '2', name: 'Chicken Biryani', category: 'Biryani', price: 299, image: Fries, description: 'Aromatic basmati rice cooked with tender chicken and spices', isVeg: false },
+  { id: '3', name: 'Margherita Pizza', category: 'Pizza', price: 200, image: Fries, description: 'Classic pizza with tomato sauce, mozzarella, and basil', isVeg: true },
+  { id: '4', name: 'Cheeseburger', category: 'Burger', price: 150, image: MasalaTea, description: 'Juicy beef patty with cheese, lettuce, and tomato', isVeg: false },
+  { id: '5', name: 'Pad Thai', category: 'Noodles', price: 180, image: MasalaTea, description: 'Stir-fried rice noodles with shrimp, tofu, peanuts, and bean sprouts', isVeg: false },
+  { id: '6', name: 'Chocolate Lava Cake', category: 'Dessert', price: 120, image: MasalaTea, description: 'Warm chocolate cake with a gooey center, served with vanilla ice cream', isVeg: true },
+]
+
+export default function RestaurantMenu() {
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', containScroll: 'trimSnaps' })
   const [selectedDish, setSelectedDish] = useState(null);
   const [quantity, setQuantity] = useState("half");
   const [cookingRequest, setCookingRequest] = useState("");
@@ -77,10 +65,82 @@ export default function FoodItemList() {
   const decreaseQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
+  const filteredItems = foodItems.filter(item => 
+    (selectedCategory === 'All' || item.category === selectedCategory) &&
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
+  const scrollPrev = React.useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = React.useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
   return (
-    <div className="space-y-4 p-2 w-full mx-auto pb-20">
-      {foodItems.map((item) => (
-        <Drawer key={item.id}>
+    <div className="bg-gray-100 min-h-screen">
+      <header className="bg-[#F04F5F] p-4 flex items-center justify-between sticky top-0 z-10">
+        {/* <Button variant="ghost" size="icon" className="text-white hover:bg-[#E03F4F]">
+          <ChevronLeft className="h-6 w-6" />
+        </Button> */}
+        <h1 className="text-xl font-semibold text-white">Restaurant Menu</h1>
+          <NotificationSheet/>
+      </header>
+
+      <div className="p-4  w-full">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            className="w-full py-3 pl-10 pr-10 rounded-md bg-white text-gray-500 placeholder-gray-400 focus:outline-none"
+            placeholder="Search menu items..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="relative px-4">
+        <div className="embla overflow-hidden" ref={emblaRef}>
+          <div className="embla__container flex">
+            {categories.map((category) => (
+              <div key={category} className="embla__slide flex-[0_0_auto] min-w-0 pr-4">
+                <Button
+                  variant={selectedCategory === category ? "default" : "outline"}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`rounded-full w-full ${
+                    selectedCategory === category
+                      ? 'bg-[#F04F5F] text-white hover:bg-[#E03F4F]'
+                      : 'border-[#F04F5F] text-[#F04F5F] hover:bg-[#F04F5F] hover:text-white'
+                  }`}
+                >
+                  {category}
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* <Button
+          variant="ghost"
+          size="icon"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full"
+          onClick={scrollPrev}
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full"
+          onClick={scrollNext}
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button> */}
+      </div>
+
+      <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 pb-20">
+        {filteredItems.map((item) => (
+          <Drawer key={item.id}>
           <DrawerTrigger asChild>
             <Card key={item.id} className="overflow-hidden">
               <CardContent className="p-0">
@@ -251,7 +311,8 @@ export default function FoodItemList() {
             </div>
           </DrawerContent>
         </Drawer>
-      ))}
+        ))}
+      </div>
     </div>
-  );
+  )
 }

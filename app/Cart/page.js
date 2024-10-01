@@ -21,6 +21,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
+import NotificationSheet from "@/components/ui/Homecomponets/Notification";
 
 function CustomizeDialog({ isOpen, onClose, item, onApply }) {
   const [size, setSize] = useState(item.customizations?.size || "Quarter");
@@ -171,9 +172,11 @@ export default function Cart() {
   };
 
   return (
-    <Card className="w-full  mx-auto h-auto py-20 flex flex-col">
-      <CardHeader className="fixed top-0 w-full bg-white z-10">
+    <Card className="w-full  mx-auto h-auto pb-20 flex flex-col">
+      <CardHeader className="sticky py-3  flex flex-row justify-between  bg-[#F04F5F] top-0 w-full text-white z-10">
         <CardTitle className="text-2xl">Your Order</CardTitle>
+        <CardTitle > <NotificationSheet/></CardTitle>
+       
       </CardHeader>
       <ScrollArea className="flex-grow">
         <CardContent className="p-6">
@@ -240,7 +243,7 @@ export default function Cart() {
           ))}
         </ScrollArea>
       </CardContent> */}
-      <CardFooter className="flex flex-col gap-2 justify-center items-center pt-4 border-t border-gray-200 fixed bottom-16 w-full bg-white">
+      <CardFooter className="flex flex-col gap-2 justify-center items-center pt-4 border-t border-gray-200 sticky bottom-16 w-full bg-white">
        <div className="flex justify-between items-center w-full">
        <span className="font-semibold">Total</span>
         <span className="font-semibold">₹{total}</span>

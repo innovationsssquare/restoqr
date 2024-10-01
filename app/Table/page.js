@@ -4,6 +4,7 @@ import { ArrowLeft, Users, ArrowRightLeft } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import NotificationSheet from '@/components/ui/Homecomponets/Notification'
 
 
 
@@ -36,12 +37,13 @@ export default function TableSwitchScreen() {
 
   return (
     <div className="flex flex-col h-full bg-gray-100">
-      <header className="bg-white p-4 flex items-center border-b fixed top-0 w-full z-10">
+      <header className="text-white p-4 flex justify-between bg-[#F04F5F] items-center border-b sticky top-0 w-full z-10">
         <h1 className="text-xl font-semibold">Switch Table</h1>
+        <NotificationSheet/>
       </header>
 
       <main className="flex-grow ">
-        <ScrollArea className="h-[80vh] py-14 ">
+        <ScrollArea className="h-auto pb-14 ">
           <div className="p-4 grid grid-cols-2 gap-4">
             {tables.map((table) => (
               <TableCard
@@ -56,7 +58,7 @@ export default function TableSwitchScreen() {
         </ScrollArea>
       </main>
 
-      <footer className="bg-gray-100 p-4  fixed bottom-16 w-full">
+      <footer className="bg-white p-4  sticky bottom-16 w-full">
         <Button 
           className="w-full bg-[#F04F5F]" 
           disabled={!selectedTable}
