@@ -60,12 +60,12 @@ export default function NotificationSheet() {
           )}
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-full sm:max-w-md">
+      <SheetContent className="w-full ">
         <SheetHeader className="flex flex-row items-center justify-between">
           <SheetTitle>Notifications</SheetTitle>
         </SheetHeader>
         <ScrollArea className="h-[calc(100vh-5rem)] mt-4">
-          <div className="pr-4">
+          <div className="">
             {notifications.map((notification, index) => (
               <React.Fragment key={notification.id}>
                 {index > 0 && <Separator className="my-2" />}

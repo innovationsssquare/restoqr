@@ -173,17 +173,19 @@ export default function Cart() {
 
   return (
     <Card className="w-full  mx-auto h-auto pb-20 flex flex-col">
-      <CardHeader className="sticky py-3  flex flex-row justify-between  bg-[#F04F5F] top-0 w-full text-white z-10">
+      <CardHeader className="sticky py-3  flex flex-row justify-between items-center bg-[#F04F5F] top-0 w-full text-white z-10">
         <CardTitle className="text-2xl">Your Order</CardTitle>
-        <CardTitle > <NotificationSheet/></CardTitle>
-       
+        <CardTitle>
+          {" "}
+          <NotificationSheet />
+        </CardTitle>
       </CardHeader>
       <ScrollArea className="flex-grow">
-        <CardContent className="p-6">
+        <CardContent className="p-4">
           {menuItems.map((item, index) => (
             <div
               key={index}
-              className="mb-6 pb-6 border-b border-gray-200 last:border-b-0 last:pb-0 last:mb-0"
+              className="mb-6 pb-6 border rounded-md  p-2 border-gray-200 last:border-b-0 last:pb-0 last:mb-0"
             >
               <div className="flex justify-between items-start mb-2">
                 <div>
@@ -202,7 +204,7 @@ export default function Cart() {
                 >
                   Customize
                 </Button>
-                <div className="flex items-center">
+                <div className="flex items-center ">
                   <Button
                     variant="outline"
                     size="icon"
@@ -244,14 +246,14 @@ export default function Cart() {
         </ScrollArea>
       </CardContent> */}
       <CardFooter className="flex flex-col gap-2 justify-center items-center pt-4 border-t border-gray-200 sticky bottom-16 w-full bg-white">
-       <div className="flex justify-between items-center w-full">
-       <span className="font-semibold">Total</span>
-        <span className="font-semibold">₹{total}</span>
-       </div> 
-        
+        <div className="flex justify-between items-center w-full">
+          <span className="font-semibold">Total</span>
+          <span className="font-semibold">₹{total}</span>
+        </div>
+
         <Button
           onClick={handleplaceorder}
-          className="w-full bg-[#F04F5F] hover:bg-red-600 text-white"
+          className="w-full bg-[#F04F5F] rounded-full hover:bg-red-600 text-white"
         >
           Place Order
         </Button>

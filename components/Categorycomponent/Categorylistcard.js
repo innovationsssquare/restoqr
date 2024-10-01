@@ -155,7 +155,7 @@ export default function FoodItemList() {
                   Marinated in yogurt & a fiery red masala, grilled in a clay
                   tandoor oven
                 </p>
-                <ScrollArea className="h-40 w-full ">
+                <ScrollArea className="h-52 w-full ">
                   <div className="mb-4">
                     <h3 className="font-semibold mb-2">Quantity</h3>
                     <p className="text-sm text-gray-600 mb-2">
