@@ -15,7 +15,7 @@ import Image from "next/image"
 import { Divider,Button } from "@nextui-org/react"
 import { useRouter } from "next/navigation"
 
-const categories = [
+const initialCategories = [
   { name: "Biryani", image: Biryani },
   { name: "Pizza", image: Pizza },
   { name: "Burger", image: Burger },
@@ -24,7 +24,23 @@ const categories = [
 ]
 
 export default function FoodCategories() {
-  const router=useRouter()
+  const router = useRouter()
+  const [categoriesList, setCategoriesList] = React.useState(initialCategories)
+
+  React.useEffect(() => {
+    fetch("http://localhost:8081/api/v1/category/getAll")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status && data.data?.length > 0) {
+          const mapped = data.data.map((cat, idx) => ({
+            name: cat.name,
+            image: initialCategories[idx % initialCategories.length].image,
+          }))
+          setCategoriesList(mapped)
+        }
+      })
+      .catch(() => {})
+  }, [])
   return (
     <div className="w-full flex flex-col justify-center items-center mx-auto px-2  py-2">
      
@@ -41,7 +57,7 @@ export default function FoodCategories() {
         className="w-full"
       >
         <CarouselContent>
-          {categories.map((category, index) => (
+          {categoriesList.map((category, index) => (
             <CarouselItem key={index} className="basis-1/4">
               <div className="p-1">
                 <div className="flex flex-col items-center justify-center">

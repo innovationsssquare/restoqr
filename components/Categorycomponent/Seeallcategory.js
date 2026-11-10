@@ -46,11 +46,13 @@ export default function RestaurantMenu() {
   const [searchQuery, setSearchQuery] = useState('')
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', containScroll: 'trimSnaps' })
   const [selectedDish, setSelectedDish] = useState(null);
-  const [quantity, setQuantity] = useState("half");
+  const [quantity, setQuantity] = useState(1);
+  const [portionSize, setPortionSize] = useState("Half");
   const [cookingRequest, setCookingRequest] = useState("");
+  const [addedMessage, setAddedMessage] = useState("");
 
   const handleQuantityChange = (value) => {
-    setQuantity(value);
+    setPortionSize(value);
   };
 
   const handleCookingRequestChange = (event) => {
@@ -64,6 +66,27 @@ export default function RestaurantMenu() {
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const handleAddToCart = (item) => {
+    if (typeof window === "undefined") return;
+    try {
+      const currentCart = JSON.parse(localStorage.getItem("restoqr_cart") || "[]");
+      const dishPrice = portionSize === "Full" ? Math.round(item.price * 1.5) : item.price;
+      currentCart.push({
+        name: item.name,
+        price: dishPrice,
+        quantity: quantity,
+        notes: `${portionSize}${cookingRequest ? ` • ${cookingRequest}` : ""}`,
+      });
+      localStorage.setItem("restoqr_cart", JSON.stringify(currentCart));
+      setAddedMessage(`✓ Added ${quantity}x ${item.name} to Cart!`);
+      setTimeout(() => {
+        setAddedMessage("");
+      }, 1500);
+    } catch (e) {
+      console.warn("Storage error:", e);
+    }
+  };
 
   const filteredItems = foodItems.filter(item => 
     (selectedCategory === 'All' || item.category === selectedCategory) &&
@@ -197,7 +220,7 @@ export default function RestaurantMenu() {
               </div>
               <div className="p-4">
                 <div className="flex justify-between items-center mb-2">
-                  <h2 className="text-xl font-bold">{item.name}</h2>
+                  <DrawerTitle className="text-xl font-bold">{item.name}</DrawerTitle>
                   <div className="flex space-x-2">
                     <BookmarkIcon className="w-6 h-6 text-gray-400" />
                     <ShareIcon className="w-6 h-6 text-gray-400" />
@@ -211,10 +234,10 @@ export default function RestaurantMenu() {
                   </div>
                   <span className="ml-2 text-sm text-gray-600">64 ratings</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">
+                <DrawerDescription className="text-sm text-gray-600 mb-4">
                   Marinated in yogurt & a fiery red masala, grilled in a clay
                   tandoor oven
-                </p>
+                </DrawerDescription>
                 <ScrollArea className="h-52 w-full ">
                   <div className="mb-4">
                     <h3 className="font-semibold mb-2">Quantity</h3>
@@ -286,8 +309,8 @@ export default function RestaurantMenu() {
                 <div className="flex justify-between items-center">
                   <div className="flex items-center border-[#F04F5F] border rounded-lg bg-pink-100">
                     <Button
-                      variant="light"
-                      isIconOnly
+                      variant="ghost"
+                      size="icon"
                       onClick={decreaseQuantity}
                       className="h-8 w-8 rounded-none"
                     >
@@ -295,17 +318,26 @@ export default function RestaurantMenu() {
                     </Button>
                     <span className="px-4 py-2">{quantity}</span>
                     <Button
-                      variant="light"
-                      isIconOnly
+                      variant="ghost"
+                      size="icon"
                       onClick={increaseQuantity}
                       className="h-8 w-8 rounded-none"
                     >
                       <PlusIcon className="h-4 w-4" />
                     </Button>
                   </div>
-                  <Button className="bg-[#F04F5F] hover:bg-[#F04F5F/80] text-white px-8">
-                    Add item ₹{330 * quantity}
-                  </Button>
+                  {addedMessage ? (
+                    <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-2 rounded-lg">
+                      {addedMessage}
+                    </span>
+                  ) : (
+                    <Button
+                      onClick={() => handleAddToCart(item)}
+                      className="bg-[#F04F5F] hover:bg-[#D03F4F] text-white px-6 font-bold text-xs"
+                    >
+                      Add item ₹{item.price * quantity}
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
